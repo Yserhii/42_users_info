@@ -1,0 +1,6 @@
+framework module Pods_42_user_information {
+  umbrella header "Pods-42 user information-umbrella.h"
+
+  export *
+  module * { export * }
+}
