@@ -2,12 +2,12 @@
 
 How to start:
 ```bash
-git clone https://github.com/Yserhii/swift-42_users_info.git && cd swift-42_users_info && open 42\ user\ information.xcworkspace
+git clone https://github.com/Yserhii/42_users_info.git && cd 42_users_info && open 42\ user\ information.xcworkspace
 ▶️ on any iPhone/Simulator
 ```
 <div align="center">
-  <img src="https://github.com/Yserhii/swift-42_users_info/blob/master/sourses/Part_1.gif" width="30%" />
-  <img src="https://github.com/Yserhii/swift-42_users_info/blob/master/sourses/Part_2.gif" width="30%" />
+  <img src="https://github.com/Yserhii/42_users_info/blob/master/sourses/Part_1.gif" width="30%" />
+  <img src="https://github.com/Yserhii/42_users_info/blob/master/sourses/Part_2.gif" width="30%" />
 </div>
 
 ## Resources I used
