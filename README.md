@@ -12,7 +12,7 @@ git clone https://github.com/Yserhii/swift-42_users_info.git && cd swift-42_user
 
 ## Resources I used
 - API: https://api.intra.42.fr/
-- import: https://cocoapods.org/ (Alamofire, SwiftyJSON)
+- Import: https://cocoapods.org/ (Alamofire, SwiftyJSON)
 
 ## Implemented:
 ## User authorization:
