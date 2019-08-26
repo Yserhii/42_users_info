@@ -25,12 +25,12 @@ git clone https://github.com/Yserhii/swift-42_users_info.git && cd swift-42_user
 - User project and mark
 ## Second screen:
 ## If you want try use app, do it with following logins:
-  -yserhii
-  -yhliboch
-  -okuchko
-  -ptyshevs
-  -akondaur
-  -apyltsov
-  -vladuhin
-  -asvirido
-  -pkolomiy
+ - yserhii
+ - yhliboch
+ - okuchko
+ - ptyshevs
+ - akondaur
+ - apyltsov
+ - vladuhin
+ - asvirido
+ - pkolomiy
