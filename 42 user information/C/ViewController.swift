@@ -12,21 +12,23 @@ import SwiftyJSON
 
 class ViewController: UIViewController, UITextFieldDelegate {
     
-    var bearerToken: String = ""
-    var informationAboutUser: String = ""
+    private var bearerToken: String = ""
+    private let requestManager = RequestManager()
     @IBOutlet weak var userName: UITextField!
     @IBAction func searchClick(_ sender: UIButton) {
         search()
     }
     
     func search() {
-        if userName.text == "" || userName.text == nil {
-            alertError(title: "Error", message: "Field login")
-        } else {
+        if userName.text != "" && userName.text != nil && bearerToken != "" {
             print(userName.text!)
             userName.text = userName.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             infoAboutCoalition()
             informationUser()
+        } else if userName.text == "" || userName.text == nil {
+            self.alertError(title: "Error", message: "Field login")
+        } else if bearerToken == ""{
+            self.alertError(title: "Error", message: "Invalid login or bad connection. Try again.")
         }
     }
     
@@ -46,48 +48,41 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-    
+}
+
+extension ViewController {
     
     func alertError(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alert, animated: true)
     }
+}
+
+extension ViewController {
     
-    func takeToken () {
+    func takeToken() {
         
-        let data = myData.init()
-        let reqUrl = data.site + "oauth/token?grant_type=client_credentials&client_id=\(data.uid)&client_secret=\(data.secred)"
-        
-        request(reqUrl, method: .post).authenticate(user: data.uid, password: data.secred)
-        .responseJSON { response in
-            if response.data != nil {
-                do {
-                    let dict = try JSONSerialization.jsonObject(with: response.data!, options: []) as! [String: Any]
-                    guard let token = dict["access_token"] as? String else { return }
-                    self.bearerToken = token
-                    print(self.bearerToken)
-                } catch (let error) { print(error.localizedDescription) }
+        requestManager.takeToken(completionHandler: {(response) in
+            if let respons = response {
+                self.bearerToken = respons
+                print(respons)
             } else {
-                print("Error in response")
+                self.alertError(title: "Error", message: "Error in response, can't get token")
             }
-        }
+        })
     }
     
     func informationUser() {
         
-        let data = myData.init()
-        let reqUrl = data.site + "v2/users/\(userName.text!)/"
-        let headers = ["Authorization": "Bearer " + bearerToken]
-        
-        request(reqUrl, method: .get, headers: headers).responseJSON { response in
-            if response.result.isSuccess {
-                allInfoUser = JSON(response.value!)
-                if allInfoUser!["error"] == "Not authorized" {
-                    self.alertError(title: "Error", message: "Тo server connection")
+        requestManager.informationUser(userName: userName.text!, token: bearerToken, completionHandler: {(response) in
+            if response != nil {
+                allInfoUser = response
+                if response!["error"] == "Not authorized" {
+                    self.alertError(title: "Error", message: "Bad server connection")
                     return
                 }
-                if allInfoUser!.isEmpty {
+                if response!.isEmpty {
                     self.alertError(title: "Error", message: "Invalid login. Try again.")
                     return
                 }
@@ -98,28 +93,20 @@ class ViewController: UIViewController, UITextFieldDelegate {
             } else {
                 self.alertError(title: "Error", message: "Invalid login. Try again.")
             }
-        }
+        })
     }
     
     func infoAboutCoalition() {
-        
-        let data = myData.init()
-        let reqUrl = data.site + "v2/users/\(userName.text!)/coalitions"
-        let headers: HTTPHeaders = ["Authorization" : "Bearer " + bearerToken]
-        
-        request(reqUrl, method: .get, headers: headers).responseJSON { response in
-            if response.result.isSuccess {
-                allInfoCoalition = JSON(response.value!)
-                if allInfoCoalition!["error"] == "Not authorized" {
-                    return
-                }
-                if allInfoCoalition!.isEmpty {
+        requestManager.infoAboutCoalition(userName: userName.text!, token: bearerToken, completionHandler: {(response) in
+            if response != nil {
+                allInfoCoalition = response
+                if allInfoCoalition!["error"] == "Not authorized" || allInfoCoalition!.isEmpty {
                     return
                 }
                 print(allInfoCoalition![0]["name"])
             } else {
                 return
             }
-        }
+        })
     }
 }

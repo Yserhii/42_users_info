@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SecondViewController: UIViewController {
     
     @IBOutlet weak var imageViewPhoto: UIImageView!
     @IBOutlet weak var imageViewCoalition: UIImageView!
@@ -34,38 +34,6 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     @IBOutlet weak var tableViewSkill: UITableView!
     @IBOutlet weak var tableViewProjects: UITableView!
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        var num: Int
-        
-        if tableView == tableViewSkill {
-            num = allUserSkils.count
-        } else {
-            num = allUserrProgects.count
-        }
-        return num
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if tableView == tableViewSkill {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "skills") as? SkillsCell
-            cell?.skills.text = "\(allUserSkils[indexPath.row].name ?? "No skill")"
-            cell?.progressViewSkills.progress = (allUserSkils[indexPath.row].level ?? 0.0) / 21
-            return cell!
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "projects") as? ProgectCell
-            cell?.projects.text = allUserrProgects[indexPath.row].name
-            cell?.projectMark.text = String(describing: allUserrProgects[indexPath.row].mark!)
-            if allUserrProgects[indexPath.row].isValidate! {
-                cell?.projectMark?.textColor = .green
-            } else {
-                cell?.projectMark?.textColor = .red
-            }
-            return cell!
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -142,6 +110,40 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 pr.isValidate = project.1["validated?"].bool ?? false
                 allUserrProgects.append(pr)
             }
+        }
+    }
+}
+
+extension SecondViewController: UITableViewDelegate, UITableViewDataSource  {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        var num: Int
+        if tableView == tableViewSkill {
+            num = allUserSkils.count
+        } else {
+            num = allUserrProgects.count
+        }
+        return num
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if tableView == tableViewSkill {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "skills") as? SkillsCell
+            cell?.skills.text = "\(allUserSkils[indexPath.row].name ?? "No skill")"
+            cell?.progressViewSkills.progress = (allUserSkils[indexPath.row].level ?? 0.0) / 21
+            return cell!
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "projects") as? ProgectCell
+            cell?.projects.text = allUserrProgects[indexPath.row].name
+            cell?.projectMark.text = String(describing: allUserrProgects[indexPath.row].mark!)
+            if allUserrProgects[indexPath.row].isValidate! && allUserrProgects[indexPath.row].mark! != 0{
+                cell?.projectMark?.textColor = .green
+            } else {
+                cell?.projectMark?.textColor = .red
+            }
+            return cell!
         }
     }
 }

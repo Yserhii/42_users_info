@@ -24,9 +24,9 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Made by yserhii from UNIT Factory" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="wkO-ka-SSx">
-                                <rect key="frame" x="103.5" y="835.5" width="207.5" height="16.5"/>
-                                <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="13"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Made by Yelanskyi Serhii" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="wkO-ka-SSx">
+                                <rect key="frame" x="128.5" y="835" width="157" height="17"/>
+                                <fontDescription key="fontDescription" name="Didot" family="Didot" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>

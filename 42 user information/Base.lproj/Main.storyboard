@@ -43,7 +43,7 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.19696551561355591" green="0.27832844853401184" blue="0.32549846172332764" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="Sgd-nB-jlI" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="20" id="1Wq-I2-eRc"/>
                             <constraint firstItem="1W4-tl-lAw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="20Z-H5-SVc"/>
@@ -61,7 +61,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Welcome" id="2sd-tI-FpE"/>
+                    <navigationItem key="navigationItem" title="Welcome" id="2sd-tI-FpE">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="Nxu-w5-Hsw"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="userName" destination="1W4-tl-lAw" id="GTe-7e-wnS"/>
                         <segue destination="qKr-H2-pIt" kind="show" identifier="userInfo" id="tmw-ck-cUG"/>
