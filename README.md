@@ -23,7 +23,6 @@ git clone https://github.com/Yserhii/42_users_info.git && cd 42_users_info && op
 - User information
 - User Skills
 - User project and mark
-## Second screen:
 ## If you want try use app, do it with following logins:
  - yserhii
  - yhliboch
